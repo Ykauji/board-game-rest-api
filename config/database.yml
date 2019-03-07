@@ -1,4 +1,4 @@
-cat config/database.yml
+
 # SQLite version 3.x
 #   gem install sqlite3
 #
