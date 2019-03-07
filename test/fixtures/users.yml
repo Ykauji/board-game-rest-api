@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  userid: MyString
+  avg_rank: 9.99
+  killCount: 1
+  gamesPlayed: 1
+
+two:
+  userid: MyString
+  avg_rank: 9.99
+  killCount: 1
+  gamesPlayed: 1
