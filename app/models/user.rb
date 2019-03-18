@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-	validates_uniqueness_of :username, :message => "username already exists!"
+	validates_uniqueness_of :userid, :message => "username already exists!"
 end
