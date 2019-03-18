@@ -14,3 +14,11 @@
 		gamesPlayed: Faker::Number.between(1,100)
 	})
 end
+
+10.times do 
+	Game.create({
+		numTurns: Faker::Number.between(20,100),
+		winnerOfGame: Faker::Name.name,
+		timeElapsed: Faker::Number.between(10,30)
+	})
+end

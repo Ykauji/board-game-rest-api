@@ -1,34 +1,27 @@
-# README
+Board-Game-API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby Version : 2.6.0p0
+Database : Postgresql 
 
-Things you may want to cover:
+Things to remember :
+- After changing gem file -> use bundle install.
+- After changing database schema -> use db:migrate -> also migrate on heroku server!
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Heroku stuff :
+- Using Heroku CL and Git to deploy.
+- Push to Heroku using git push Heroku master (or whatever branch you like)
+- 
 
 API: 
+
+Routes: url/api/v1/route
+- users
+- games
 
 url/api/v1/users has GET,POST,DELETE(take this away later?) to the user table in the database.
 ie. GET url/api/v1/users will return user json objects. 
 
-User {
+class User { (has_many : Game)
 	int id;
 	string username
 	decimal averageRank
@@ -37,4 +30,14 @@ User {
 	...
 }
 
+class Game {
+	
+}
+
 POST to User requires userparams which is (string username,decimal avg_rank)
+
+Planned work: 
+- Queries using Active Record Queries
+	- Find all games that the user has played in (brute search vs. references?)
+    - 
+- Authentication ie. need user to delete/create data. Give this access to the game clients? 

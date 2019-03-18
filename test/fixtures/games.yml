@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numTurns: 1
+  winnerOfGame: MyString
+  timeElapsed: 1
+
+two:
+  numTurns: 1
+  winnerOfGame: MyString
+  timeElapsed: 1
