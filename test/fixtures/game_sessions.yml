@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  User: one
+  Game: one
+  total_damage_dealt: 1
+  total_damage_taken: 1
+  total_healing: 1
+  num_kills: 1
+  weapons_collected: 1
+
+two:
+  User: two
+  Game: two
+  total_damage_dealt: 1
+  total_damage_taken: 1
+  total_healing: 1
+  num_kills: 1
+  weapons_collected: 1

@@ -5,6 +5,14 @@ class Api::V1::UsersController < ApplicationController
   def index
     @users = User.all
 
+    if params[:greater_kills]
+      @users = @users.where("users.kill_count >= ?", (params[:greater_kills]))
+    end
+
+    if params[:lesser_kills]
+      @users = @users.where("users.kill_count <= ?", (params[:lesser_kills]))
+    end
+
     render json: @users
   end
 

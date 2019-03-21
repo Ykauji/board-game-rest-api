@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
-	validates :numTurns, presence: true
-	validates :winnerOfGame, presence: true
-	validates :timeElapsed, presence: true
+	has_many :game_sessions
+	validates :num_turns, presence: true
+	validates :winner_of_game, presence: true
+	validates :time_elapsed, presence: true
 end

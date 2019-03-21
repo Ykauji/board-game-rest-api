@@ -15,23 +15,41 @@ Heroku stuff :
 API: 
 
 Routes: url/api/v1/route
-- users
+- users 
+	- params  
+		- greater_kills : returns users that have >= parameter kills
+			- i.e. url/api/v1/users?greater_kills=3 
+		- lesser_kills : returns users that have <= parameter kills
+			- i.e url/api/v1/users?lesser_kills=3 
 - games
 
 url/api/v1/users has GET,POST,DELETE(take this away later?) to the user table in the database.
 ie. GET url/api/v1/users will return user json objects. 
 
-class User { (has_many : Game)
-	int id;
-	string username
+class User { (has_many : GameSession)
+	int id; (primary key)
+	string userid (username)
 	decimal averageRank
 	integer killCount
 	integer gamesPlayed
 	...
 }
 
-class Game {
-	
+class Game (has_many : GameSession) {
+	int gameID; (primary key)
+	int numTurns;
+	string winnerOfGame;
+	int timeElapsed;
+	...
+}
+
+class GameSession { (belongs to User,Game)
+	int gameSessionID; <- primary key
+	string playerName; <- foreign key#1
+	int gameID <- foreign key#2
+	int totalDamageDealt;
+	int totalKills;
+	...
 }
 
 POST to User requires userparams which is (string username,decimal avg_rank)
