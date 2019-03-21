@@ -13,6 +13,11 @@ class Api::V1::UsersController < ApplicationController
       @users = @users.where("users.kill_count <= ?", (params[:lesser_kills]))
     end
 
+    if params[:game_sessions]
+      @game_sessions = GameSession.all
+      @users = @game_sessions.where("user_id = ?", (params[:game_sessions]))
+    end
+
     render json: @users
   end
 
