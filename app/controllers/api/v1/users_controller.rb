@@ -18,6 +18,7 @@ class Api::V1::UsersController < ApplicationController
       @users = @game_sessions.where("user_id = ?", (params[:game_sessions]))
     end
 
+
     render json: @users
   end
 
@@ -59,6 +60,6 @@ class Api::V1::UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:userid, :avg_rank, :killCount, :gamesPlayed)
+      params.require(:user).permit(:user_id, :avg_rank, :kill_count, :games_played)
     end
 end

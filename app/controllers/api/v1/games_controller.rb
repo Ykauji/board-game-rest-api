@@ -46,6 +46,6 @@ class Api::V1::GamesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params.require(:game).permit(:numTurns, :winnerOfGame, :timeElapsed)
+      params.require(:game).permit(:num_turns, :winner_of_game, :time_elapsed)
     end
 end

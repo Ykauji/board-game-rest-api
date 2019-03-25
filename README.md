@@ -78,6 +78,27 @@ Planned work:
 
 - Authentication ie. need user to delete/create data. Give this access to the game clients? 
 
+Tests! 
+	- Table Consistency:
+		 - Using Rspec and Shoulda-matcher 
+		 - Test associations i.e many to one, many to many etc.
+		 - Check on adding new entries that all relationships are valid, i.e the User that the GameSession is tied to exists. 
+		 - Check foreign key consistency
+		 - Check GameSession does not have more than 'x' players connected to it per game.
+		
+   - API requests: 
+   		 - Post: adding new Game, check that all UserID's are different per GameSession. 
+		 - Post: adding new Game, check that all gameID are the same for the GameSessions. 
+		 - Post: adding new table, check all required attributes, otherwise error -> "missing x"
+		 - Authentication stuff? tbd. 
+		 - Get: Check request codes etc. ie. "can't find user "johnbohamo" <- necessary? or just 	return empty JSON object.
+   - Validation Tests
+   		 - Users with size {1-999} length names.
+   		 - Users with wrong type inputs in user-params
+   		 - Game with more than 4 GameSessions
+   		 - Non-unique GameSession within Game
+   		 - Other little things
+
 
 Rails Console Commands Test:
 
