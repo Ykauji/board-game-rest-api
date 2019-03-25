@@ -16,7 +16,7 @@ names = Array.new
 	names << new_name
 
 	User.create({
-		user_id: new_name,
+		username: new_name,
 		avg_rank: Faker::Number.between(1,4),
 		kill_count: Faker::Number.between(1,300),
 		games_played: Faker::Number.between(1,100)
