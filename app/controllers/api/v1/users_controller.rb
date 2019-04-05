@@ -34,7 +34,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       render json: @user, status: :created, location: api_v1_user_url(@user)
     else
-      render json: @user.errors, status: :unprocessable_entity
+     render json: @user.errors, status: :unprocessable_entity
     end
   end
 
@@ -60,6 +60,6 @@ class Api::V1::UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:user_id, :avg_rank, :kill_count, :games_played)
+      params.permit(:username, :avg_rank, :kill_count, :games_played)
     end
 end

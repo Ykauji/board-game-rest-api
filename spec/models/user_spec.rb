@@ -11,11 +11,12 @@ RSpec.describe User, type: :model do
 
   describe '#username' do
    it { should validate_presence_of(:username) }
+   it { should validate_presence_of(:password_digest) }
    it { should validate_length_of(:username).is_at_least(3).with_message(/is too short/) }
   end
 
   describe '#kill_count' do 
    it { should validate_inclusion_of(:kill_count).in_range(0..99999999999).with_message(/must be within 0 >= x <= 99999999999/) }
   end
-
+  
 end

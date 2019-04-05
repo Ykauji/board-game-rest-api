@@ -17,6 +17,7 @@ names = Array.new
 
 	User.create({
 		username: new_name,
+		password_digest: "potato",
 		avg_rank: Faker::Number.between(1,4),
 		kill_count: Faker::Number.between(1,300),
 		games_played: Faker::Number.between(1,100)
@@ -35,19 +36,31 @@ end
 
 	last_game_id = @game = Game.last
 	# Create Game_Sessions! w/ winner of game.
-	GameSession.create!({
-		user_id: local_winner,
-		game_id: last_game_id.id,
-		total_damage_dealt: Faker::Number.between(100,1000),
-		total_damage_taken: Faker::Number.between(100,1000),
-		total_healing: Faker::Number.between(100,1000),
-		num_kills: Faker::Number.between(0,3),
-		weapons_collected: Faker::Number.between(1,100)
-	})
+	#GameSession.create!({
+	#	user_id: local_winner,
+	#	game_id: last_game_id.id,
+	#	total_damage_dealt: Faker::Number.between(100,1000),
+	#	total_damage_taken: Faker::Number.between(100,1000),
+	#	total_healing: Faker::Number.between(100,1000),
+	#	num_kills: Faker::Number.between(0,3),
+	#	weapons_collected: Faker::Number.between(1,100)
+	#})
 	# Randomize other players in game.
-	3.times do 
+	# Generate 3 unique names
+	unique_user_id_for_game = Array.new
+	unique_user_id_for_game << local_winner 
+
+	while (unique_user_id_for_game.length <= 4) do 
+		new_unique_name = Faker::Number.between(1,User.last.id)
+		if !unique_user_id_for_game.include? (new_unique_name) 
+			unique_user_id_for_game << new_unique_name
+		end
+	end 
+
+	counter = 0;
+	4.times do 
 		GameSession.create!({
-			user_id: Faker::Number.between(1,User.last.id),
+			user_id: unique_user_id_for_game[counter],
 			game_id: last_game_id.id,
 			total_damage_dealt: Faker::Number.between(100,1000),
 			total_damage_taken: Faker::Number.between(100,1000),
@@ -55,5 +68,6 @@ end
 			num_kills: Faker::Number.between(0,3),
 			weapons_collected: Faker::Number.between(1,100)
 		})
-	end
-end
+		counter += 1
+	    end
+    end
