@@ -3,7 +3,7 @@ class AuthorizeApiRequest
     @headers = headers
   end
 
-  # Service entry point - return valid user object
+  # Service entry point - return valid user object <- I don't like all these 'users'!!
   def call
     {
       user: user
@@ -16,18 +16,26 @@ class AuthorizeApiRequest
 
   def user
     # check if user is in the database
-    # memoize user object
-    @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
+    # memoize user object, @ means instanced object -> so other classes can ref it pseudo global?
+
+    # || = means equal to itself or equal to right side!
+    user_id_from_token = decoded_auth_token[:user_id]
+    if !user_id_from_token 
+      puts 'not valid token'
+    end
+    @user ||= User.find(user_id_from_token) #if decoded_auth_token
+    #puts instance_variable_get(:@user).password_digest
     # handle user not found
+
   rescue ActiveRecord::RecordNotFound => e
     # raise custom error
     raise(
       ExceptionHandler::InvalidToken,
-      ("#{Message.invalid_token} #{e.message}")
+      ("#{Message.invalid_token} #{e.message} ")
     )
   end
 
-  # decode authentication token
+  # decode authentication token by checking headers
   def decoded_auth_token
     @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
   end

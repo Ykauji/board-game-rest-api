@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-
+  skip_before_action :authorize_request, only: :create
   # GET /users
   def index
     @users = User.all
@@ -29,13 +29,17 @@ class Api::V1::UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
+    #@user = User.new(user_params)
 
-    if @user.save
-      render json: @user, status: :created, location: api_v1_user_url(@user)
-    else
-     render json: @user.errors, status: :unprocessable_entity
-    end
+    #if @user.save
+     # render json: @user, status: :created, location: api_v1_user_url(@user)
+    #else
+     #render json: @user.errors, status: :unprocessable_entity
+    #end
+    user = User.create!(user_params)
+    auth_token = AuthenticateUser.new(user.username, user.password).call
+    response = { message: Message.account_created, auth_token: auth_token }
+    json_response(response, :created)
   end
 
   # PATCH/PUT /users/1
@@ -60,6 +64,16 @@ class Api::V1::UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.permit(:username, :avg_rank, :kill_count, :games_played)
+      #params.permit(:username, :avg_rank, :kill_count, :games_played)
+      params.permit(
+      :username,
+      :password,
+      :password_digest,
+      :password_confirmation,
+      :avg_rank,
+      :kill_count,
+      :games_played
+      )
+
     end
 end

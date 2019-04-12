@@ -17,7 +17,7 @@ names = Array.new
 
 	User.create({
 		username: new_name,
-		password_digest: "potato",
+		password_digest: "potato@gmail.com",
 		avg_rank: Faker::Number.between(1,4),
 		kill_count: Faker::Number.between(1,300),
 		games_played: Faker::Number.between(1,100)
