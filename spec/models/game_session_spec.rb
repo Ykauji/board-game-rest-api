@@ -8,7 +8,6 @@ RSpec.describe GameSession, type: :model do
   it { should belong_to(:User) }
   it { should belong_to(:Game) }
 
-
   # Validation tests
 
   # FINALLY NO ERROR, BEEN WORKING ON THIS FOR 5 HOURS!!!!111

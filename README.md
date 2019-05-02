@@ -27,6 +27,10 @@ Routes: url/api/v1/route
 		-
 - games
 	- params
+    
+- auth
+    - login 
+        - 
 		- 
 
 url/api/v1/users has GET,POST,DELETE(take this away later?) to the user table in the database.
@@ -98,6 +102,26 @@ Tests!
    		 - Game with more than 4 GameSessions
    		 - Non-unique GameSession within Game
    		 - Other little things
+
+If you want to work on this: 
+
+Important files/folders: 
+- config/routes <- this is what directs the controllers
+- db <- handles all the database schema stuff, and seeding, if you want to alter the database, create migration here.
+- app/controllers <- where all the logic for the calls should be held.
+- app/models <- validation for models ie. "must have username" etc. 
+- app/auth <- some helper classes for authentication <- one for JWT token and one for authorizing api requests. 
+- app/lib <- some error handling, other classes can call these module methods to specify the error. json_web_token is actually for encrypting and decrypting the token using the secret sauce. 
+
+Important Testing: main two files will be "spec" and "test".
+- spec : mostly self explanatory just checks the consistency of the models, controllers, requests etc.
+	- spec/factories : this basically seeds a random user to test against. We manipulate this to check for things like a User with no password or has a invalid username etc. and check if our tests catch this. PLEASE NOTE: Spec does not affect how the API works, it just makes tests to check consistency
+- spec/rails_helper : This is the main configuration file, ie. add dependencies and such here. 
+- spec/spec_helper : lol I dont know what this does, also configuration though. 
+
+File Structure: 
+	- App : main folder where stuff happens ie. Controllers, Models etc. 
+	- 
 
 
 Rails Console Commands Test:

@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   root 'api/v1/users#index'
   post 'auth/login', to: 'api/v1/authentication#authenticate'
   post 'signup', to: 'api/v1/users#create'
-  namespace :api do
-  	namespace :v1 do
+  namespace :api do 
+  	namespace :v1, defaults: { format: :json } do
   		resources :users
   		resources :games
   		resources :game_sessions

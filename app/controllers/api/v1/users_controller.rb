@@ -27,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
     render json: @user
   end
 
-  # POST /users
+  # POST /auth/signup
   def create
     #@user = User.new(user_params)
 
@@ -38,8 +38,12 @@ class Api::V1::UsersController < ApplicationController
     #end
     user = User.create!(user_params)
     auth_token = AuthenticateUser.new(user.username, user.password).call
+
+    # If auth token, call 2nd factor auth. 
+
     response = { message: Message.account_created, auth_token: auth_token }
     json_response(response, :created)
+
   end
 
   # PATCH/PUT /users/1
@@ -71,7 +75,6 @@ class Api::V1::UsersController < ApplicationController
       :password_digest,
       :password_confirmation,
       :avg_rank,
-      :kill_count,
       :games_played
       )
 
